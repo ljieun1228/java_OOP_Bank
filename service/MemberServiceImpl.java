@@ -12,7 +12,7 @@ public class MemberServiceImpl implements MemberService {
 	private MemberBean[] memberBeans;
 	private int count;
 
-	void MemberServiceImpl() {
+	public MemberServiceImpl() {
 		this.memberBeans = new MemberBean[10];
 		this.count = 0;
 	}
@@ -29,40 +29,64 @@ public class MemberServiceImpl implements MemberService {
 		memberBean.setSsn(ssn);
 		memberBeans[count] = memberBean;
 		count++;
-		}
-
+	}
 
 	/**
 	 * READ
 	 */
 	@Override
 	public MemberBean[] findAllMember() {
-		// TODO Auto-generated method stub
 		return memberBeans;
 	}
 
 	@Override
 	public MemberBean[] findByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		int j = 0;
+		for(int i = 0 ;i<count;i++){
+			if(memberBeans[i].getName().equals(name)){
+				j++;
+			}
+		}
+		MemberBean[] beans = new MemberBean[j];
+		j = 0;
+	       for (int i = 0; i < count; j++) {
+	            if (beans[j].getName().equals(name)) {
+	            	memberBeans[j] = beans[i];
+	                    j++;
+	                    if(j == memberBeans.length) {
+	                        
+	                    }
+	            }
+	        }
+		return memberBeans;
 	}
 
 	@Override
 	public MemberBean findById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		MemberBean memberBean = new MemberBean();
+		for (int i = 0; i < count; i++) {
+			if (memberBeans[i].equals(id)) {
+				memberBean = memberBeans[i];
+			}
+		}
+		return memberBean;
 	}
 
 	@Override
-	public boolean existMember() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean existMember(String id, String pass) {
+		boolean login = false;
+		for (int i = 0; i < count; i++) {
+			if (memberBeans[i].getId().equals(id) && memberBeans[i].getPass().equals(pass)) {
+				login = true;
+				break;
+			}
+		}
+		return login;
 	}
 
 	@Override
 	public int countMember() {
-		// TODO Auto-generated method stub
-		return 0;
+		return count;
 	}
 
 	/**
@@ -70,8 +94,12 @@ public class MemberServiceImpl implements MemberService {
 	 */
 	@Override
 	public void updatePass(String id, String pass, String newpass) {
-		// TODO Auto-generated method stub
-
+		for (int i = 0; i < count; i++) {
+			if (existMember(id, pass)) {
+				memberBeans[i].setPass(newpass);
+				break;
+			}
+		}
 	}
 
 	/**
@@ -79,8 +107,13 @@ public class MemberServiceImpl implements MemberService {
 	 */
 	@Override
 	public void deleteMember(String id, String pass) {
-		// TODO Auto-generated method stub
-
+		for (int i = 0; i < count; i++) {
+			if (existMember(id, pass)) {
+				memberBeans[i] = memberBeans[count - 1];
+				memberBeans[count - 1] = null;
+				count--;
+				break;
+			}
+		}
 	}
-
 }

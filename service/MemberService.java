@@ -18,7 +18,7 @@ public interface MemberService {
 
 	public MemberBean findById(String id);
 
-	public boolean existMember();
+	public boolean existMember(String id, String pass);
 
 	public int countMember();
 

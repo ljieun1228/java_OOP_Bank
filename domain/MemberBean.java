@@ -38,7 +38,7 @@ public class MemberBean {
 
 	@Override
 	public String toString() {
-		return "MemberBean [id=" + id + ", name=" + name + ", pass=" + pass + ", ssn=" + ssn + "]";
+		return "Member [id=" + id + ", name=" + name + ", pass=" + pass + ", ssn=" + ssn + "]";
 	}
 
 }

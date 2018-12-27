@@ -21,8 +21,8 @@ public class AccountBean {
 		this.today = today;
 	}
 
-	public String getMoney() {
-		return accountNum;
+	public int getMoney() {
+		return money;
 	}
 
 	public void setMoney(int money) {
@@ -30,7 +30,6 @@ public class AccountBean {
 	}
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return String.format("계좌번호:%s 계좌발급일:%s 잔고:%n ", accountNum, today, money);
+		return String.format("계좌번호:%s 계좌발급일:%s 잔고:%d \n", accountNum, today, money);
 	}
 }
